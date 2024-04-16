@@ -50,7 +50,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
         src: `${NEXT_PUBLIC_URL}/MGLImage.png`,
       },
       input: {
-        text: 'What Project do you want to attest to?',
+        text: 'Enter project name',
       },
       ogTitle: 'Project Attestation!',
       postUrl: `${NEXT_PUBLIC_URL}`,
