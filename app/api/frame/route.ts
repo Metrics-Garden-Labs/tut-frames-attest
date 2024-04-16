@@ -23,13 +23,16 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   /**
    * Use this code to redirect to a different page
    */
-  if (message?.button === 2) {
+  if (message?.button === 3) {
     return NextResponse.redirect('https://www.optimism.io/', { status: 302 });
   }
 
   return new NextResponse(
     getFrameHtmlResponse({
       buttons: [
+        {
+          label: 'Back',
+        },
         {
           action: 'tx',
           label: 'Attest to Project',
@@ -42,9 +45,9 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
         },
       ],
       image: {
-        src: `${NEXT_PUBLIC_URL}/park-1.png`,
+        src: `${NEXT_PUBLIC_URL}/MGLImage.png`,
       },
-      postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
+      postUrl: `${NEXT_PUBLIC_URL}`,
     }),
   );
 }

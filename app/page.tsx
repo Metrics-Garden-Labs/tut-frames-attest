@@ -7,19 +7,11 @@ const frameMetadata = getFrameMetadata({
     {
       label: 'Lets Attest!',
     },
-    {
-      action: 'tx',
-      label: 'Attest to Project',
-      target: `${NEXT_PUBLIC_URL}/api/tx`,
-      postUrl: `${NEXT_PUBLIC_URL}/api/tx-success`,
-    },
+    
   ],
   image: {
     src: `${NEXT_PUBLIC_URL}/MGLImage.png`,
     //aspectRatio: '1:1',
-  },
-  input: {
-    text: 'Project You want to attest to!',
   },
   postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
 });
