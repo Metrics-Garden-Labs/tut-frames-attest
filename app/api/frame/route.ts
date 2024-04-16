@@ -9,11 +9,13 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   if (!isValid) {
     return new NextResponse('Message not valid', { status: 500 });
   }
+  let inputText: string = body.untrustedData.inputText;
 
   const text = message.input || '';
   let state = {
     page: 0,
   };
+
   try {
     state = JSON.parse(decodeURIComponent(message.state?.serialized));
   } catch (e) {

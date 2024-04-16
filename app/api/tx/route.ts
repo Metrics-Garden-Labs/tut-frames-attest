@@ -26,7 +26,9 @@ async function getResponse(req: NextRequest): Promise<NextResponse | Response> {
   //encode the schema
   const schemaEncoder = new SchemaEncoder('string project');
   //hardcode the schema data, maybe that will work
-  const encodedData = schemaEncoder.encodeData([{ name: 'project', value: 'OP', type: 'string' }]);
+  const encodedData = schemaEncoder.encodeData([
+    { name: 'project', value: JSON.stringify(textData), type: 'string' },
+  ]);
 
   const functionData = {
     schema: schemaUID as string,

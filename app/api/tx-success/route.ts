@@ -15,12 +15,13 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   console.log(attestUid);
   const transactionId = body?.untrustedData?.transactionId;
 
+  // the button that shows the transaction does not work,
+  //can go to the scanner and see the transaction that you made.
+  //happy enough with that for now
+
   return new NextResponse(
     getFrameHtmlResponse({
       buttons: [
-        {
-          label: `Tx: ${txnId} || '--'`,
-        },
         {
           label: 'View Attestation',
           action: 'link',
