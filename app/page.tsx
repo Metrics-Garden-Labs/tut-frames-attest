@@ -16,7 +16,7 @@ const frameMetadata = getFrameMetadata({
   ],
   image: {
     src: `${NEXT_PUBLIC_URL}/MGLImage.png`,
-    aspectRatio: '1:1',
+    //aspectRatio: '1:1',
   },
   input: {
     text: 'Project You want to attest to!',
