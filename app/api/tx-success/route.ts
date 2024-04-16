@@ -10,11 +10,18 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     return new NextResponse('Message not valid', { status: 500 });
   }
 
+  const transactionId = body?.untrustedData?.transactionId;
+
   return new NextResponse(
     getFrameHtmlResponse({
       buttons: [
         {
-          label: `Tx: ${body?.untrustedData?.transactionId || '--'}`,
+          label: `Tx: ${transactionId || '--'}`,
+        },
+        {
+          label: 'View Attestation',
+          action: 'link',
+          target: `https://optimism.easscan.org/view/${transactionId}`,
         },
       ],
       image: {

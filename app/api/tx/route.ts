@@ -32,10 +32,12 @@ async function getResponse(req: NextRequest): Promise<NextResponse | Response> {
   const functionData = {
     schema: schemaUID,
     data: {
-      recipient: '0x2A3Ce312571612d2ca3A05F4AB5f6AbEde266271',
+      //recipient: '0x2A3Ce312571612d2ca3A05F4AB5f6AbEde266271',
+      recipient: '0x0000000000000000000000000000000000000000',
       expirationTime: undefined,
       revocable: true,
-      refUID: undefined,
+      //refUID: undefined,
+      refUID: '0x0000000000000000000000000000000000000000000000000000000000000000',
       data: encodedData,
       value: 0,
     },
