@@ -32,6 +32,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
       buttons: [
         {
           label: 'Back',
+          target: `${NEXT_PUBLIC_URL}`,
         },
         {
           action: 'tx',
