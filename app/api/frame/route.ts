@@ -49,9 +49,9 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
       image: {
         src: `${NEXT_PUBLIC_URL}/MGLImage.png`,
       },
-      input: {
-        text: 'What Project do you want to attest to?',
-      },
+      // input: {
+      //   text: 'What Project do you want to attest to?',
+      // },
       postUrl: `${NEXT_PUBLIC_URL}`,
     }),
   );
