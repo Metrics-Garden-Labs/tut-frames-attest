@@ -1,6 +1,7 @@
 import { FrameRequest, getFrameMessage, getFrameHtmlResponse } from '@coinbase/onchainkit/frame';
 import { NextRequest, NextResponse } from 'next/server';
 import { NEXT_PUBLIC_URL } from '../../config';
+import { getNewAttestId } from '../../utils/utils';
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
   const body: FrameRequest = await req.json();
@@ -9,19 +10,21 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   if (!isValid) {
     return new NextResponse('Message not valid', { status: 500 });
   }
-
+  let txnId = body?.untrustedData?.transactionId;
+  const attestUid = await getNewAttestId(txnId!);
+  console.log(attestUid);
   const transactionId = body?.untrustedData?.transactionId;
 
   return new NextResponse(
     getFrameHtmlResponse({
       buttons: [
         {
-          label: `Tx: ${transactionId || '--'}`,
+          label: `Tx: ${txnId} || '--'`,
         },
         {
           label: 'View Attestation',
           action: 'link',
-          target: `https://optimism.easscan.org/view/${transactionId}`,
+          target: `https://optimism.easscan.org/attestation/view/${attestUid}`,
         },
       ],
       image: {

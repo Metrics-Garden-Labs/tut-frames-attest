@@ -32,7 +32,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse | Response> {
     schema: schemaUID as string,
     data: {
       //recipient: '0x2A3Ce312571612d2ca3A05F4AB5f6AbEde266271',
-      recipient: '0x0000000000000000000000000000000000000000',
+      recipient: '0x440Fc0954C44B3d1bde627bDddc65F7F9050493F',
       expirationTime: 0,
       revocable: true,
       //refUID: undefined,
