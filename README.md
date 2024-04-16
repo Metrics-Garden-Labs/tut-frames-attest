@@ -1,7 +1,6 @@
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="(https://github.com/Metrics-Garden-Labs/tut-frames-attest/blob/main/public/MGLImage.png">
-    <img alt="OnchainKit logo vibes" src="https://github.com/Zizzamia/a-frame-in-100-lines/blob/main/public/park-4.png" width="auto">
   </picture>
 </p>
 
