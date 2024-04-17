@@ -16,6 +16,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse | Response> {
     return new NextResponse('Message not valid', { status: 500 });
   }
 
+  //having text data set up like this is only useful if you have multiple fields to attest to
   const textData: any = {
     project: inputText,
   };
@@ -27,7 +28,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse | Response> {
   const schemaEncoder = new SchemaEncoder('string project');
   //hardcode the schema data, maybe that will work
   const encodedData = schemaEncoder.encodeData([
-    { name: 'project', value: JSON.stringify(textData), type: 'string' },
+    { name: 'project', value: textData.inputText, type: 'string' },
   ]);
 
   const functionData = {
