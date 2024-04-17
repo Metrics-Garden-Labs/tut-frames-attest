@@ -16,7 +16,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse | Response> {
     return new NextResponse('Message not valid', { status: 500 });
   }
 
-  //having text data set up like this is only useful if you have multiple fields to attest to
+  //having text data set up like this is only useful if you have multiple fields to attest to in the schema
   const textData: any = {
     project: inputText,
   };
