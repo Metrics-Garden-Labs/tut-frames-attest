@@ -17,9 +17,10 @@ async function getResponse(req: NextRequest): Promise<NextResponse | Response> {
   }
 
   //having text data set up like this is only useful if you have multiple fields to attest to in the schema
-  const textData: any = {
-    project: inputText,
-  };
+  // const textData: any = {
+  //   project: inputText,
+  // };
+  console.log(inputText);
 
   //simple schema that just says project
   const schemaUID = '0x36921ad1b16b4e049df813054f13c03e8417e222512d9a6f9a050b56106b6c1c';
@@ -28,7 +29,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse | Response> {
   const schemaEncoder = new SchemaEncoder('string project');
   //hardcode the schema data, maybe that will work
   const encodedData = schemaEncoder.encodeData([
-    { name: 'project', value: textData.inputText, type: 'string' },
+    { name: 'project', value: inputText, type: 'string' },
   ]);
 
   const functionData = {
