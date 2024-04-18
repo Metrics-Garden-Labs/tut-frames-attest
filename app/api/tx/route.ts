@@ -27,7 +27,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse | Response> {
 
   //encode the schema
   const schemaEncoder = new SchemaEncoder('string project');
-  //hardcode the schema data, maybe that will work
+
+  //TODO: works just putting the input text in, when it comes to production, will have to input fixed data based on the frame of the project they want to attest to data on
   const encodedData = schemaEncoder.encodeData([
     { name: 'project', value: inputText, type: 'string' },
   ]);
@@ -36,6 +37,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse | Response> {
     schema: schemaUID as string,
     data: {
       //recipient: '0x2A3Ce312571612d2ca3A05F4AB5f6AbEde266271',
+      //TODOO: recipient is hardcoded, this will need to be variable based on the project they want to attest to
       recipient: '0x440Fc0954C44B3d1bde627bDddc65F7F9050493F',
       expirationTime: 0,
       revocable: true,
@@ -53,9 +55,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse | Response> {
   });
 
   const txData: FrameTransactionResponse = {
-    //hardcode op
+    //hardcode chain id for  op
     chainId: 'eip155:10',
-    //chainId: `eip155:${optimism.id}`,
     method: 'eth_sendTransaction',
     params: {
       abi: [],
