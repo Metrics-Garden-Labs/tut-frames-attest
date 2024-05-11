@@ -2,6 +2,14 @@ import { FrameRequest, getFrameMessage, getFrameHtmlResponse } from '@coinbase/o
 import { NextRequest, NextResponse } from 'next/server';
 import { NEXT_PUBLIC_URL } from '../../config';
 
+//todo for this frame
+//link to our database
+//get the information from the users
+//change the page to be bricis related
+//people leave their feedback for event they did with her
+//i think i can actually build this frame into our app. so it has everything already connected
+//see if i can get that in the frame validator
+
 async function getResponse(req: NextRequest): Promise<NextResponse> {
   const body: FrameRequest = await req.json();
   const { isValid, message } = await getFrameMessage(body, { neynarApiKey: 'NEYNAR_ONCHAIN_KIT' });
@@ -34,7 +42,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
       buttons: [
         {
           label: 'Back',
-          target: `${NEXT_PUBLIC_URL}/`,
+          target: `${NEXT_PUBLIC_URL}`,
           //maybe get rid of this if it keeps failing
         },
         {

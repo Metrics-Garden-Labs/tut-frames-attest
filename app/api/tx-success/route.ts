@@ -3,6 +3,10 @@ import { NextRequest, NextResponse } from 'next/server';
 import { NEXT_PUBLIC_URL } from '../../config';
 import { getNewAttestId } from '../../utils/utils';
 
+//maybe link the people to go and see our website to view the attestation
+//all hardcode this atm.
+//
+
 async function getResponse(req: NextRequest): Promise<NextResponse> {
   const body: FrameRequest = await req.json();
   const { isValid } = await getFrameMessage(body);
