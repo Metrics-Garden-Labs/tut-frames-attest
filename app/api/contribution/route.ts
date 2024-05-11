@@ -1,3 +1,5 @@
+//api/contribution/route.ts
+
 import { FrameRequest, getFrameMessage, getFrameHtmlResponse } from '@coinbase/onchainkit/frame';
 import { NextRequest, NextResponse } from 'next/server';
 import { NEXT_PUBLIC_URL } from '../../config';
@@ -34,7 +36,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   //if the button press in the previous page was 3
   //display https://utfs.io/f/3539faae-d07b-40cd-b0c1-3c5404b86994-a1v7m8.png
   // Retrieving from localStorage and comparing
-  const feedback = localStorage.getItem('feedback'); // Retrieves as 'true' or 'false'
+  const feedback = localStorage.getItem('feedback');
+  console.log('feedback', feedback);
   const imageUrl =
     feedback === 'true' // Make sure to compare with string literals
       ? 'https://utfs.io/f/a4f28a75-5047-41bc-8f8a-7f461db6ffda-4w0oep.png'

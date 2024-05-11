@@ -1,3 +1,5 @@
+//api/frame/route.ts
+
 import { FrameRequest, getFrameMessage, getFrameHtmlResponse } from '@coinbase/onchainkit/frame';
 import { NextRequest, NextResponse } from 'next/server';
 import { NEXT_PUBLIC_URL } from '../../config';
@@ -44,10 +46,14 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   if (message?.button === 2) {
     feedback = true;
     // Store feedback when a button is clicked
-    localStorage.setItem('feedback', String(feedback)); // or false
+    localStorage.setItem('feedback', String(feedback));
+    console.log('feedback', feedback);
+    console.log('feedback', localStorage.getItem('feedback'));
   } else if (message?.button === 3) {
     feedback = false;
-    localStorage.setItem('feedback', String(feedback)); // or false
+    localStorage.setItem('feedback', String(feedback));
+    console.log('feedback', feedback);
+    console.log('feedback', localStorage.getItem('feedback'));
   }
 
   return new NextResponse(
