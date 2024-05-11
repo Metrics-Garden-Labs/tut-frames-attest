@@ -36,16 +36,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   //if the button press in the previous page was 3
   //display https://utfs.io/f/3539faae-d07b-40cd-b0c1-3c5404b86994-a1v7m8.png
   // Retrieving from localStorage and comparing
-  const feedback = localStorage.getItem('feedback');
-  console.log('feedback', feedback);
-  const imageUrl =
-    feedback === 'true' // Make sure to compare with string literals
-      ? 'https://utfs.io/f/a4f28a75-5047-41bc-8f8a-7f461db6ffda-4w0oep.png'
-      : 'https://utfs.io/f/3539faae-d07b-40cd-b0c1-3c5404b86994-a1v7m8.png';
-
-  if (message?.button === 3) {
-    return NextResponse.redirect('https://www.metricsgarden.xyz', { status: 302 });
-  }
+  const useful = false;
 
   return new NextResponse(
     getFrameHtmlResponse({
@@ -67,7 +58,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
         },
       ],
       image: {
-        src: imageUrl,
+        src: 'https://utfs.io/f/3539faae-d07b-40cd-b0c1-3c5404b86994-a1v7m8.png',
       },
       input: {
         text: 'Leave your feedback',
