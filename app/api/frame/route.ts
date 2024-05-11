@@ -10,6 +10,8 @@ import { NEXT_PUBLIC_URL } from '../../config';
 //i think i can actually build this frame into our app. so it has everything already connected
 //see if i can get that in the frame validator
 
+//this page will show the contribution, that will determine the boolean
+
 async function getResponse(req: NextRequest): Promise<NextResponse> {
   const body: FrameRequest = await req.json();
   const { isValid, message } = await getFrameMessage(body, {
@@ -35,8 +37,10 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   /**
    * Use this code to redirect to a different page
    */
-  if (message?.button === 3) {
-    return NextResponse.redirect('https://www.metricsgarden.xyz/', { status: 302 });
+  // if (message?.button === 3) {
+  //   return NextResponse.redirect('https://www.metricsgarden.xyz/', { status: 302 });
+  // }
+  if (message?.button === 2) {
   }
 
   return new NextResponse(
@@ -49,19 +53,17 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
         },
         {
           action: 'post',
-          label: 'Attest to Contribution',
+          label: 'Useful',
           target: `${NEXT_PUBLIC_URL}/api/contribution`,
         },
         {
-          action: 'post_redirect',
-          label: 'Metrics Garden',
+          action: 'post',
+          label: 'Not Useful',
+          target: `${NEXT_PUBLIC_URL}/api/contribution`,
         },
       ],
       image: {
-        src: `${NEXT_PUBLIC_URL}/MGLImage.png`,
-      },
-      input: {
-        text: 'Enter project name',
+        src: `https://utfs.io/f/04d3d588-a049-4359-8433-f3af13b56e8b-qglbm5.png`,
       },
       ogTitle: 'Project Attestation!',
       postUrl: `${NEXT_PUBLIC_URL}`,

@@ -2,13 +2,7 @@ import { FrameRequest, getFrameMessage, getFrameHtmlResponse } from '@coinbase/o
 import { NextRequest, NextResponse } from 'next/server';
 import { NEXT_PUBLIC_URL } from '../../config';
 
-//todo for this frame
-//link to our database
-//get the information from the users
-//change the page to be bricis related
-//people leave their feedback for event they did with her
-//i think i can actually build this frame into our app. so it has everything already connected
-//see if i can get that in the frame validator
+//todo
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
   const body: FrameRequest = await req.json();
@@ -36,7 +30,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
    * Use this code to redirect to a different page
    */
   if (message?.button === 3) {
-    return NextResponse.redirect('https://www.metricsgarden.xyz/', { status: 302 });
+    return NextResponse.redirect('https://www.metricsgarden.xyz', { status: 302 });
   }
 
   return new NextResponse(
