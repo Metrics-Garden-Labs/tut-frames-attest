@@ -44,13 +44,14 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
       buttons: [
         {
           label: 'Back',
-          target: `${NEXT_PUBLIC_URL}/`,
+          target: `${NEXT_PUBLIC_URL}/api/frame`,
           //maybe get rid of this if it keeps failing
         },
         {
-          action: 'post',
-          label: 'Attest to Contribution',
-          target: `${NEXT_PUBLIC_URL}/api/contribution`,
+          action: 'tx',
+          label: 'Attest to Project',
+          target: `${NEXT_PUBLIC_URL}/api/tx`,
+          postUrl: `${NEXT_PUBLIC_URL}/api/tx-success`,
         },
         {
           action: 'post_redirect',
@@ -61,7 +62,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
         src: `${NEXT_PUBLIC_URL}/MGLImage.png`,
       },
       input: {
-        text: 'Enter project name',
+        text: 'Leave your feedback',
       },
       ogTitle: 'Project Attestation!',
       postUrl: `${NEXT_PUBLIC_URL}`,
