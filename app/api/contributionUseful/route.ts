@@ -51,7 +51,13 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
         },
         {
           action: 'tx',
-          label: 'Attest to Project',
+          label: 'Useful',
+          target: `${NEXT_PUBLIC_URL}/api/tx`,
+          postUrl: `${NEXT_PUBLIC_URL}/api/tx-success`,
+        },
+        {
+          action: 'tx',
+          label: 'Not Useful',
           target: `${NEXT_PUBLIC_URL}/api/tx`,
           postUrl: `${NEXT_PUBLIC_URL}/api/tx-success`,
         },
