@@ -40,7 +40,14 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   // if (message?.button === 3) {
   //   return NextResponse.redirect('https://www.metricsgarden.xyz/', { status: 302 });
   // }
+  let feedback = null;
   if (message?.button === 2) {
+    feedback = true;
+    // Store feedback when a button is clicked
+    localStorage.setItem('feedback', String(feedback)); // or false
+  } else if (message?.button === 3) {
+    feedback = false;
+    localStorage.setItem('feedback', String(feedback)); // or false
   }
 
   return new NextResponse(
