@@ -5,6 +5,7 @@ export interface Project {
   ethAddress?: string;
   ecosystem: string;
   projectName: string;
+  oneliner: string | null;
   websiteUrl: string | null;
   twitterUrl: string | null;
   githubUrl: string | null;
@@ -17,11 +18,13 @@ export interface Contribution {
   userFid: string;
   projectName: string;
   contribution: string;
+  governancetype: string | null;
   ecosystem: string;
+  secondaryecosystem: string | null;
   desc: string;
   link: string;
   easUid: string | null;
-  ethAddress?: string;
+  ethAddress: string;
   createdAt?: Date | null;
 }
 
@@ -29,6 +32,7 @@ export interface NewProject {
   userFid: string;
   ethAddress: string;
   projectName: string;
+  oneliner?: string;
   websiteUrl?: string;
   twitterUrl?: string;
   githubUrl?: string;
@@ -48,16 +52,18 @@ export interface SearchResult {
 }
 
 export interface NewContribution {
-  id: number;
+  id?: number;
   userFid: string;
   projectName: string;
   contribution: string;
+  governancetype?: string;
+  ecosystem: string;
+  secondaryecosystem?: string;
   desc: string;
   link: string;
-  ecosystem: string;
-  easUid: string;
+  easUid: string | null;
   ethAddress: string;
-  createdAt: Date;
+  createdAt?: Date | null;
 }
 
 export interface NewUser {
@@ -95,32 +101,38 @@ export type UserBadgeVerification = {
 };
 
 export interface NewContributionAttestation {
-  id: number;
+  id?: number;
   userFid: string;
   projectName: string;
   contribution: string;
   ecosystem: string;
   attestationUID: string;
   attesterAddy: string;
-  attestationType: string;
-  feedback: string | null;
-  createdAt: Date;
+  feedback?: string;
+  isdelegate?: boolean;
+  rating?: string;
+  improvementareas?: string;
+  extrafeedback?: string;
+  createdAt?: Date;
 }
 
 export interface ContributionAttestation {
   id: number;
   userFid: string;
-  projectName: string | undefined;
+  projectName: string;
   contribution: string;
-  ecosystem: string | undefined;
+  ecosystem: string;
   attestationUID: string;
   attesterAddy: string;
-  attestationType: string;
   feedback: string | null;
+  isdelegate: boolean;
+  rating: string;
+  improvementareas: string | null;
+  extrafeedback: string | null;
   createdAt: Date;
 }
 
-export type Attestation = {
+export interface Attestation {
   id: number;
   userFid: string;
   projectName: string;
@@ -128,10 +140,13 @@ export type Attestation = {
   ecosystem: string;
   attestationUID: string;
   attesterAddy: string;
-  attestationType: string;
   feedback: string | null;
+  isdelegate: boolean | null;
+  rating: string | null;
+  improvementareas: string | null;
+  extrafeedback: string | null;
   createdAt: Date | null;
-};
+}
 
 export interface userAddresses {
   id: number;
@@ -156,19 +171,19 @@ export interface newUserAddresses {
 }
 
 // Define type for insertion purposes
-export type NewUserAddress = Omit<userAddresses, "id">;
+export type NewUserAddress = Omit<userAddresses, 'id'>;
 
 //Attestation Network Type
 export type AttestationNetworkType =
-  | "Ethereum"
-  | "Optimism"
-  | "Base"
-  | "Arbitrum One"
-  | "Polygon"
-  | "Scroll"
-  | "Celo"
-  | "Blast"
-  | "Linea";
+  | 'Ethereum'
+  | 'Optimism'
+  | 'Base'
+  | 'Arbitrum One'
+  | 'Polygon'
+  | 'Scroll'
+  | 'Celo'
+  | 'Blast'
+  | 'Linea';
 
 // Define a type for the contract addresses
 export type ContractAddresses = {
@@ -183,7 +198,6 @@ export type AttestationData = {
   githubURL: string;
 };
 
-export interface ContributionAttestationWithUsername
-  extends ContributionAttestation {
+export interface ContributionAttestationWithUsername extends ContributionAttestation {
   username: string;
 }

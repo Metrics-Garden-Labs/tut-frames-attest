@@ -6,13 +6,23 @@ import { FrameRequest, getFrameMessage, getFrameHtmlResponse } from '@coinbase/o
 import { NextRequest, NextResponse } from 'next/server';
 import { NEXT_PUBLIC_URL } from '../../config';
 
+import { NeynarAPIClient, FeedType, FilterType } from "@neynar/nodejs-sdk";
+
+// make sure to set your NEYNAR_API_KEY .env
+// don't have an API key yet? get one at neynar.com
+
 //todo
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
+
   const body: FrameRequest = await req.json();
+  const NEYNAR_KEY = process.env.NEYNAR_API_KEY || '';
+  const client = new NeynarAPIClient(NEYNAR_KEY);
   const { isValid, message } = await getFrameMessage(body, {
     neynarApiKey: process.env.NEYNAR_API_KEY,
   });
+
+
 
   if (!isValid) {
     return new NextResponse('Message not valid', { status: 500 });
@@ -70,7 +80,10 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
       ],
       image: {
         src: 'https://utfs.io/f/04d3d588-a049-4359-8433-f3af13b56e8b-qglbm5.png',
-      },
+        // <div>
+        //   <h1>hello</h1>
+        // </div>
+    },
       input: {
         text: 'Leave your feedback',
       },

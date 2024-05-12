@@ -6,12 +6,15 @@ import abi from '../../_contracts/OPEASABI';
 import { OP_EAS_ADDRESS } from '../../config';
 import type { FrameTransactionResponse } from '@coinbase/onchainkit/frame';
 import { SchemaEncoder } from '@ethereum-attestation-service/eas-sdk';
+import { insertAttestation } from '../../../src/lib/db';
+import { NewContributionAttestation } from '../../../src/types';
 
 async function getResponse(req: NextRequest): Promise<NextResponse | Response> {
   const body: FrameRequest = await req.json();
   const { isValid } = await getFrameMessage(body, { neynarApiKey: 'NEYNAR_ONCHAIN_KIT' });
   const inputText = body.untrustedData.inputText || '';
   const button = body.untrustedData.buttonIndex || '';
+  let fid = body.untrustedData.fid || '';
 
   let useful = true;
   if (button === 2) {
@@ -35,20 +38,20 @@ async function getResponse(req: NextRequest): Promise<NextResponse | Response> {
   console.log(inputText);
 
   //simple schema that just says project
-  const schemaUID = '0x0ea974daef377973de71b8a206247f436f67364853a10d460c2623d18035db12';
-
-  //encode the schema
-  const schemaEncoder = new SchemaEncoder('string Contribution, bool Useful, string Feedback');
-
-  //TODO: works just putting the input text in, when it comes to production, will have to input fixed data based on the frame of the project they want to attest to data on
+  const attestationSchema = "0x5f5afd9626d9d0cd46c7de120032c2470da00c4be9bcef1dd75fa8c074f17e70";
+  const schemaEncoder = new SchemaEncoder('string Farcaster, string Contribution, uint8 Rating, string HowItHelped, bool IsDelegate, string Feedback');
   const encodedData = schemaEncoder.encodeData([
-    { name: 'Contribution', type: 'string', value: 'Venice Beach' },
-    { name: 'Useful', type: 'bool', value: useful },
-    { name: 'Feedback', type: 'string', value: inputText },
+      { name: 'Farcaster', type: 'string', value: fid },
+      { name: 'Contribution', type: 'string', value: 'Venice'},
+      { name: 'Rating', type: 'uint8', value: 5 },
+      { name: 'HowItHelped', type: 'string', value: 'It was a great project'},
+      { name: 'IsDelegate', type: 'bool', value: true},
+      { name: 'Feedback', type: 'string', value: 'It was a great project'},
   ]);
 
+
   const functionData = {
-    schema: schemaUID as string,
+    schema: attestationSchema as string,
     data: {
       //recipient: '0x2A3Ce312571612d2ca3A05F4AB5f6AbEde266271',
       //TODOO: recipient is hardcoded, this will need to be variable based on the project they want to attest to
@@ -79,6 +82,26 @@ async function getResponse(req: NextRequest): Promise<NextResponse | Response> {
       value: parseEther('0').toString(),
     },
   };
+
+  const transactionId = body?.untrustedData?.transactionId;
+
+
+  const newAttestation = {
+  userFid: String(fid),
+  projectName: 'Beach',
+  contribution: 'Venice Beach',
+  ecosystem: 'Optimism',
+  attestationUID: transactionId ? String(transactionId) : "",
+  attesterAddy: "",
+  feedback: inputText,
+  isdelegate: true,
+  rating: String(5),
+  improvementareas: "we shall see",
+  extrafeedback: "review", 
+  } as NewContributionAttestation;
+
+  const insertedAttestation = await insertAttestation(newAttestation);
+  console.log('Inserted Attestation', insertedAttestation);
   return NextResponse.json(txData);
 }
 

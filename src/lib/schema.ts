@@ -37,6 +37,7 @@ export const projects = pgTable(
     ethAddress: text('ethAddress').notNull(),
     ecosystem: text('ecosystem').notNull(),
     projectName: text('projectName').unique().notNull(),
+    oneliner: text('oneliner'),
     websiteUrl: text('websiteUrl'),
     twitterUrl: text('twitterUrl'),
     githubUrl: text('githubUrl'),
@@ -79,6 +80,8 @@ export const contributions = pgTable(
     ecosystem: text('ecosystem')
       .references(() => projects.ecosystem)
       .notNull(),
+    governancetype: text('governancetype'),
+    secondaryecosystem: text('secondaryecosystem'),
     contribution: text('contribution').notNull().unique(),
     desc: text('desc').notNull(),
     link: text('link').notNull(),
@@ -109,7 +112,7 @@ export const contributions = pgTable(
 //pop up that says this user has already attested to this contibution
 
 export const contributionattestations = pgTable(
-  'contributionAttestations',
+  'contributionattestations',
   {
     id: serial('id').primaryKey(),
     userFid: text('userFid')
@@ -126,13 +129,16 @@ export const contributionattestations = pgTable(
       .notNull(),
     attestationUID: text('attestationUID').notNull().unique(),
     attesterAddy: text('attesterAddy').notNull(),
-    attestationType: text('attestationType').notNull(),
+    rating: text('rating'),
+    improvementareas: text('improvementareas'),
+    isdelegate: boolean('isdelegate').default(false),
     feedback: text('feedback'),
+    extrafeedback: text('extrafeedback'),
     createdAt: timestamp('createdAt').defaultNow(),
   },
-  (contributionAttestations) => {
+  (contributionattestations) => {
     return {
-      contAttestIdIdx: uniqueIndex('cont_attest_id_idx').on(contributionAttestations.id),
+      contAttestIdIdx: uniqueIndex('cont_attest_id_idx').on(contributionattestations.id),
     };
   },
 );
