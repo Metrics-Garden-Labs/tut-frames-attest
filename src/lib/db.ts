@@ -1,4 +1,3 @@
-import './config';
 import { drizzle } from 'drizzle-orm/vercel-postgres';
 import { sql as vercelsql } from '@vercel/postgres';
 import { users, projects, contributions, contributionattestations, user_addresses } from './schema';
